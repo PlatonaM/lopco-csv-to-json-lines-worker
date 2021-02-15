@@ -31,7 +31,7 @@ use_null = int(os.getenv("use_null")) if os.getenv("use_null") else 0
 data_cache_path = "/data_cache"
 
 
-def str_to_json_type(value: str, use_null=False):
+def str_to_json_type(value: str, use_null=0):
     if not value and use_null:
         return None
     if value.isdigit():
@@ -80,7 +80,7 @@ with open("{}/{}".format(data_cache_path, input_file), "r") as in_file:
                             for _pos in range(len(sub_tab)):
                                 sub_dict[sub_tab_map[_pos]] = str_to_json_type(sub_tab[_pos], use_null)
                             new_line[field].append(sub_dict)
-            out_file.write(json.dumps(new_line) + "\n")
+            out_file.write(json.dumps(new_line, separators=(',', ':')) + "\n")
             line_count += 1
 
 
