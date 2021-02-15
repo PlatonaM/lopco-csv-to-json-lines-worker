@@ -25,15 +25,9 @@ dep_instance = os.getenv("DEP_INSTANCE")
 job_callback_url = os.getenv("JOB_CALLBACK_URL")
 input_file = os.getenv("source_csv")
 delimiter = os.getenv("delimiter")
-sub_tab_headers = os.getenv("sub_table_headers")
-sub_tab_delimiters = os.getenv("sub_table_delimiters")
-data_cache_path = "/data_cache"
-
-if sub_tab_headers:
-    sub_tab_headers = sub_tab_headers.split(",")
-
-if sub_tab_delimiters:
-    sub_tab_delimiters = sub_tab_delimiters.split(",")
+sub_tab_headers = os.getenv("sub_table_headers").split(",") if os.getenv("sub_table_headers") else list()
+sub_tab_delimiters = os.getenv("sub_table_delimiters").split(",") if os.getenv("sub_table_delimiters") else list()
+data_cache_path = "data_cache"
 
 
 sub_tab_maps = dict()
