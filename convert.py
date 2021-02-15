@@ -27,7 +27,7 @@ input_file = os.getenv("source_csv")
 delimiter = os.getenv("delimiter")
 sub_tab_headers = os.getenv("sub_table_headers").split(",") if os.getenv("sub_table_headers") else list()
 sub_tab_delimiters = os.getenv("sub_table_delimiters").split(",") if os.getenv("sub_table_delimiters") else list()
-data_cache_path = "data_cache"
+data_cache_path = "/data_cache"
 
 
 sub_tab_maps = dict()
