@@ -27,7 +27,21 @@ input_file = os.getenv("source_csv")
 delimiter = os.getenv("delimiter")
 sub_tab_headers = os.getenv("sub_table_headers").split(",") if os.getenv("sub_table_headers") else list()
 sub_tab_delimiters = os.getenv("sub_table_delimiters").split(",") if os.getenv("sub_table_delimiters") else list()
+use_null = bool(os.getenv("use_null")) if os.getenv("use_null") else False
 data_cache_path = "/data_cache"
+
+
+def str_to_json_type(value: str, use_null=False):
+    if not value and use_null:
+        return None
+    if value.isdigit():
+        return int(value)
+    if "." in value or "," in value:
+        try:
+            return float(value)
+        except Exception:
+            pass
+    return value
 
 
 sub_tab_maps = dict()
@@ -53,7 +67,7 @@ with open("{}/{}".format(data_cache_path, input_file), "r") as in_file:
             for pos in range(line_len):
                 field = line_map[pos]
                 if field not in sub_tab_maps:
-                    new_line[field] = line[pos]
+                    new_line[field] = str_to_json_type(line[pos], use_null)
                 else:
                     sub_tabs = line[pos]
                     new_line[field] = list()
@@ -64,7 +78,7 @@ with open("{}/{}".format(data_cache_path, input_file), "r") as in_file:
                             sub_tab_map = sub_tab_maps[field]
                             sub_dict = dict()
                             for _pos in range(len(sub_tab)):
-                                sub_dict[sub_tab_map[_pos]] = sub_tab[_pos]
+                                sub_dict[sub_tab_map[_pos]] = str_to_json_type(sub_tab[_pos], use_null)
                             new_line[field].append(sub_dict)
             out_file.write(json.dumps(new_line) + "\n")
             line_count += 1
