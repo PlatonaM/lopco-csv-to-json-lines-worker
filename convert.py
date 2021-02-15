@@ -27,7 +27,7 @@ input_file = os.getenv("source_csv")
 delimiter = os.getenv("delimiter")
 sub_tab_headers = os.getenv("sub_table_headers").split(",") if os.getenv("sub_table_headers") else list()
 sub_tab_delimiters = os.getenv("sub_table_delimiters").split(",") if os.getenv("sub_table_delimiters") else list()
-use_null = bool(os.getenv("use_null")) if os.getenv("use_null") else False
+use_null = int(os.getenv("use_null")) if os.getenv("use_null") else 0
 data_cache_path = "/data_cache"
 
 
