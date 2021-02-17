@@ -57,14 +57,14 @@ with open("{}/{}".format(data_cache_path, input_file), "r") as in_file:
     with open("{}/{}".format(data_cache_path, output_file), "w") as out_file:
         line_count = 0
         first_line = in_file.readline().strip().split(delimiter)
-        line_len = len(first_line)
+        line_range = range(len(first_line))
         line_map = dict()
-        for pos in range(line_len):
+        for pos in line_range:
             line_map[pos] = first_line[pos]
         for line in in_file:
             line = line.strip().split(delimiter)
             new_line = dict()
-            for pos in range(line_len):
+            for pos in line_range:
                 field = line_map[pos]
                 if field not in sub_tab_maps:
                     new_line[field] = str_to_json_type(line[pos], use_null)
