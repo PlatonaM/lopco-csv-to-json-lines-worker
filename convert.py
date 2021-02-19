@@ -70,8 +70,8 @@ with open("{}/{}".format(data_cache_path, input_file), "r") as in_file:
                     new_line[field] = str_to_json_type(line[pos], use_null)
                 else:
                     sub_tabs = line[pos]
-                    new_line[field] = list()
                     if sub_tabs:
+                        new_line[field] = list()
                         sub_tabs = sub_tabs.split(sub_tab_delimiters[1])
                         for sub_tab in sub_tabs:
                             sub_tab = sub_tab.split(sub_tab_delimiters[0])
@@ -80,6 +80,8 @@ with open("{}/{}".format(data_cache_path, input_file), "r") as in_file:
                             for _pos in range(len(sub_tab)):
                                 sub_dict[sub_tab_map[_pos]] = str_to_json_type(sub_tab[_pos], use_null)
                             new_line[field].append(sub_dict)
+                    else:
+                        new_line[field] = None if use_null else str()
             out_file.write(json.dumps(new_line, separators=(',', ':')) + "\n")
             line_count += 1
 
