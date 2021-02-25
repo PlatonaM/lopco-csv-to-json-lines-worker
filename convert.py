@@ -109,7 +109,7 @@ with open("{}/{}".format(data_cache_path, input_file), "r") as in_file:
                             sub_tab_map = sub_tab_maps[field]
                             sub_dict = dict()
                             for _pos in range(len(sub_tab)):
-                                sub_dict[sub_tab_map[_pos]] = converter(sub_tab[_pos], field + "_" + sub_tab_map[_pos])
+                                sub_dict[sub_tab_map[_pos]] = converter(sub_tab[_pos], field + "." + sub_tab_map[_pos])
                             new_line[field].append(sub_dict)
                     else:
                         new_line[field] = None if field_type_map else str()

@@ -41,4 +41,4 @@ Set the delimiters for "sub tables" via `sub_table_delimiters`.
 
 Provide data types (`float`, `int`, `bool`) for certain fields with `data_types` (if omitted all fields will be treated as strings):
 
-    float:field_name_C;field_name_D,int:field_name_A_sub_field_name_a;field_name_B_sub_field_name_a
+    float:field_name_C;field_name_D,int:field_name_A.sub_field_name_a;field_name_B.sub_field_name_a
