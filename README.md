@@ -1,4 +1,31 @@
-#### Description
+## lopco-csv-to-json-lines-worker
+
+Converts each row of a CSV file to a JSON object and saves these objects as rows of a new file.
+
+### Configuration
+
+`delimiter`: Delimiter used in the CSV file.
+
+`sub_table_headers`: Declare columns containing "sub tables" here by using the following notation: `column_name_A:sub_column_name_a;sub_column_name_b,column_name_B:sub_column_name_a`
+
+`sub_table_delimiters`: Set the delimiters used by "sub tables".
+
+`data_types`: Provide data types (`float`, `int`, `bool`) for selected columns by using the following notation: `float:column_name_C;column_name_D,int:column_name_A.sub_column_name_a;column_name_B.sub_column_name_a`
+(omitted columns will will be treated as strings)
+
+### Inputs
+
+Type: single
+
+`source_csv`: Input CSV file.
+
+### Outputs
+
+Type: single
+
+`output_file`: File containing JSON objects.
+
+### Description
 
     {
         "name": "CSV To JSON Lines",
@@ -32,13 +59,3 @@
             ]
         }
     }
-
-Fields containing a "sub table" must be declared via the `sub_table_headers` config option:
-    
-    field_name_A:sub_field_name_a;sub_field_name_b,field_name_B:sub_field_name_a
-
-Set the delimiters for "sub tables" via `sub_table_delimiters`.
-
-Provide data types (`float`, `int`, `bool`) for certain fields with `data_types` (if omitted all fields will be treated as strings):
-
-    float:field_name_C;field_name_D,int:field_name_A.sub_field_name_a;field_name_B.sub_field_name_a
